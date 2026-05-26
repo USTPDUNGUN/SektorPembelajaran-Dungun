@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sektor Pembelajaran | PPD Dungun</title>
+    
+    <!-- Tulisan (Font) yang lebih menarik dan moden -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Tetapan Asas & Variabel Warna Tema Digital */
+        :root { 
+            --primary-color: #0f172a; /* Biru/Hitam Digital Gelap */
+            --primary-light: #1e293b; 
+            --secondary-color: #0ea5e9; /* Biru Neon/Cyan */
+            --accent-color: #06b6d4; /* Cyan Terang */
+            --bg-color: #f8fafc; 
+            --text-main: #334155; 
+            --text-muted: #64748b;
+            --white: #ffffff; 
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; scroll-behavior: smooth; }
+        
+        /* Navigasi (Glassmorphism Effect) */
+        header { 
+            background: rgba(15, 23, 42, 0.9); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--white); 
+            padding: 1.2rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+        }
+        .logo h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px; }
+        .logo span { color: var(--secondary-color); }
+        
+        nav ul { list-style: none; display: flex; gap: 1.8rem; }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.3s, transform 0.3s; display: inline-block;}
+        nav a:hover { color: var(--accent-color); transform: translateY(-2px); }
+        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--white); }
+        
+        /* Hero Section (Gambar Baru & Gradient Digital) */
+        .hero { 
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover; 
+            color: var(--white); 
+            text-align: center; 
+            padding: 8rem 1rem; 
+        }
+        .hero h2 { font-size: 3.2rem; margin-bottom: 1rem; font-weight: 700; line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 700px; margin-inline: auto; color: #e2e8f0; font-weight: 300; }
+        
+        .btn-utama { 
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); 
+            color: var(--white); 
+            padding: 0.9rem 2.5rem; 
+            text-decoration: none; 
+            font-weight: 600; 
+            border-radius: 50px; 
+            transition: all 0.3s ease; 
+            display: inline-block; 
+            box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.5);
+            letter-spacing: 0.5px;
+        }
+        .btn-utama:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(14, 165, 233, 0.6); }
+        
+        /* Seksyen Umum */
+        .section { padding: 5rem 5%; }
+        .section-title { 
+            text-align: center; 
+            font-size: 2.2rem; 
+            margin-bottom: 3rem; 
+            position: relative; 
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: linear-gradient(to right, var(--secondary-color), var(--accent-color)); margin: 0.8rem auto 0; border-radius: 2px; }
+        
+        .umum-container { 
+            background: var(--white); 
+            padding: 3rem; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            text-align: justify; 
+            border-left: 6px solid var(--secondary-color); 
+            margin-bottom: 2rem; 
+        }
+        
+        /* Pautan Khas & Dinamik */
+        .pautan-section-wrapper { background: #e0e7ff; padding: 4rem 5%; border-radius: 30px; margin: 0 2%; box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);}
+        .pautan-sub-title { font-size: 1.1rem; color: var(--primary-light); margin-bottom: 1.5rem; font-weight: 600; text-align: center; text-transform: uppercase; letter-spacing: 1px;}
+        .pautan-grid { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; margin-bottom: 3rem; }
+        
+        .pautan-item { 
+            background: var(--white); 
+            color: var(--primary-color); 
+            padding: 0.8rem 1.8rem; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            border: 1px solid #e2e8f0;
+        }
+        .pautan-item:hover { background: var(--secondary-color); color: var(--white); transform: translateY(-3px); box-shadow: 0 10px 15px rgba(14, 165, 233, 0.2); border-color: var(--secondary-color); }
+        
+        .pautan-item.tetap { 
+            background: linear-gradient(135deg, #10b981, #059669); 
+            color: white; 
+            border: none;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+        .pautan-item.tetap:hover { background: linear-gradient(135deg, #059669, #047857); box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4); }
+        
+        /* Grid Kad Unit */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .card { 
+            background: var(--white); 
+            border-radius: 16px; 
+            padding: 2rem; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            border-top: 5px solid var(--secondary-color); 
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom right, rgba(14, 165, 233, 0.05), transparent); pointer-events: none;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px -5px rgba(0,0,0,0.1); border-top-color: var(--accent-color); }
+        
+        .card h3 { color: var(--primary-color); margin-bottom: 1.5rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.8rem; font-size: 1.25rem; font-weight: 700;}
+        .card ul { list-style: none; }
+        .card li { margin-bottom: 1.2rem; background: #f8fafc; padding: 1.2rem; border-radius: 10px; display: flex; flex-direction: column; border: 1px solid #f1f5f9; transition: border-color 0.3s;}
+        .card li:hover { border-color: #bae6fd; }
+        .card li strong { font-size: 1.1rem; color: var(--primary-light); font-weight: 600; margin-bottom: 0.3rem;}
+        .card li a { color: var(--secondary-color); text-decoration: none; font-weight: 600; margin-top: 10px; word-break: break-all; display: inline-block; font-size: 0.95rem;}
+        .card li a:hover { text-decoration: underline; color: var(--accent-color);}
+        .card li span.tarikh { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;}
+        
+        /* Borang Tambah Data */
+        .form-wrapper { background: #f1f5f9; padding: 4rem 5%; }
+        .form-container { background: var(--white); padding: 3rem; border-radius: 16px; max-width: 700px; margin: 0 auto; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 1.8rem; }
+        label { display: block; margin-bottom: 0.6rem; font-weight: 600; color: var(--primary-light); font-size: 0.95rem; }
+        input, select, textarea { width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: all 0.3s; background-color: #f8fafc;}
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--secondary-color); background-color: var(--white); box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);}
+        
+        button[type="submit"] { 
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); 
+            color: var(--white); 
+            border: none; 
+            padding: 1.2rem 1.5rem; 
+            font-size: 1.1rem; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            width: 100%; 
+            font-weight: 600; 
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+        }
+        button[type="submit"]:hover { background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); transform: translateY(-2px); box-shadow: 0 8px 15px rgba(14, 165, 233, 0.3); }
+        
+        /* Footer */
+        footer { background: var(--primary-color); color: #94a3b8; text-align: center; padding: 2.5rem 1rem; font-size: 0.9rem;}
+        
+        /* Responsive CSS */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.2rem; }
+            nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(15, 23, 42, 0.95); padding: 1.5rem 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1); backdrop-filter: blur(10px);}
+            nav ul.active { display: flex; }
+            nav ul li { text-align: center; margin-bottom: 1.5rem; }
+            .menu-toggle { display: block; }
+            .pautan-section-wrapper { border-radius: 0; margin: 0; }
+        }
+    </style>
+    
+    <!-- Skrip Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><h1>PPD<span>Dungun</span></h1></div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#utama">Utama</a></li>
+                <li><a href="#sektor">Maklumat Sektor</a></li>
+                <li><a href="#pautan">Pautan Berguna</a></li>
+                <li><a href="#unit">Ruangan Unit</a></li>
+                <li><a href="#tambah">Tambah Info</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="utama" class="hero">
+        <h2>Sektor Pembelajaran PPD Dungun</h2>
+        <p>Platform interaktif maklumat dan perkongsian bahan rasmi untuk seluruh warga pendidik dan staf Sektor Pembelajaran, Pejabat Pendidikan Daerah Dungun.</p>
+        <a href="#unit" class="btn-utama">Akses Maklumat Unit</a>
+    </section>
+
+    <!-- Paparan Sektor & Sumber Utama -->
+    <section id="sektor" class="section">
+        <h2 class="section-title">Paparan Umum Sektor</h2>
+        <div class="umum-container">
+            <p style="margin-bottom: 1rem;">Sektor Pembelajaran PPD Dungun komited dalam memacu kualiti pendidikan ke arah kecemerlangan di semua sekolah di bawah pentadbiran PPD Dungun. Kami memainkan peranan sebagai penggerak utama di dalam pelaksanaan dasar kurikulum, menyediakan sokongan kepakaran pedagogi, dan memastikan kemenjadian murid secara holistik.</p>
+            <div style="margin-top: 1.5rem; background: #f0fdfa; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #0d9488;">
+                <p style="margin-bottom: 0.5rem; color: #0f766e;"><strong>📂 Pautan Sumber Rasmi PPD:</strong></p>
+                <a href="https://drive.google.com/drive/folders/1PHtPeHxcxFD7q102edQ7hjHQp1Uu_c9i?usp=sharing" target="_blank" style="color: #0f766e; font-weight: 600; text-decoration: none; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 5px;">
+                    Muat Turun & Akses Folder Pengurus Kualiti ➔
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksyen Pautan Berguna (Tetap & Dinamik) -->
+    <div class="pautan-section-wrapper" id="pautan">
+        <h2 class="section-title" style="margin-bottom: 2.5rem;">Pautan Berguna</h2>
+        
+        <div class="pautan-sub-title">📌 Pautan Utama Sektor</div>
+        <div class="pautan-grid">
+            <a href="https://ustpdungun.github.io/OPR-Studio-PPD-Dungun/" target="_blank" class="pautan-item tetap">📊 OPR Studio PPD Dungun</a>
+            <a href="https://script.google.com/a/macros/moe.gov.my/s/AKfycbymp5l30oLQeH9d_VZKUROE66z0-ual-lacmWCN8v9GVvuTpDDGQoOehE4Jjwoe-gdc7w/exec" target="_blank" class="pautan-item tetap">🏫 Direktori Sekolah</a>
+            <a href="https://bit.ly/SistemJana-Memo" target="_blank" class="pautan-item tetap">📝 Sistem Jana Memo</a>
+            <a href="https://sites.google.com/moe-dl.edu.my/pentaksiran-spb-2025/home" target="_blank" class="pautan-item tetap">📈 Data Pentaksiran 2025</a>
+        </div>
+
+        <div class="pautan-sub-title" style="margin-top: 2.5rem;">🔗 Pautan Tambahan Komuniti</div>
+        <div class="pautan-grid" id="pautan-container">
+            <!-- Pautan tambahan akan diletakkan di sini -->
+        </div>
+    </div>
+
+    <!-- Seksyen Maklumat Unit -->
+    <section id="unit" class="section">
+        <h2 class="section-title">Ruangan Maklumat Unit</h2>
+        
+        <!-- Semua 9 kotak Unit akan dipaparkan terus di dalam grid ini -->
+        <div class="grid" id="unit-container">
+            <!-- JavaScript akan menjana kad-kad kosong ke sini pada mulanya -->
+        </div>
+    </section>
+
+    <!-- Seksyen Borang Tambah Data -->
+    <section id="tambah" class="form-wrapper">
+        <h2 class="section-title">Muat Naik / Tambah Maklumat</h2>
+        <div class="form-container">
+            <form id="infoForm">
+                <div class="form-group">
+                    <label for="unitSelect">Kategori / Unit</label>
+                    <select id="unitSelect" required>
+                        <option value="" disabled selected>-- Sila Pilih Kategori --</option>
+                        <option value="Unit Sumber dan Teknologi Pendidikan">Unit Sumber dan Teknologi Pendidikan</option>
+                        <option value="Unit Pemulihan Khas">Unit Pemulihan Khas</option>
+                        <option value="Unit Pendidikan Khas">Unit Pendidikan Khas</option>
+                        <option value="Unit Pendidikan Islam">Unit Pendidikan Islam</option>
+                        <option value="SISC+ Bahasa Melayu">SISC+ Bahasa Melayu</option>
+                        <option value="SISC+ Bahasa Inggeris">SISC+ Bahasa Inggeris</option>
+                        <option value="SISC+ Sains">SISC+ Sains</option>
+                        <option value="SISC+ Matematik">SISC+ Matematik</option>
+                        <option value="SISC+ Sejarah">SISC+ Sejarah</option>
+                        <option value="Pautan Lain" style="font-weight: bold; color: var(--secondary-color);">📌 Pautan Lain (Umum / Pantas)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="title">Tajuk Pautan / Perkara</label>
+                    <input type="text" id="title" placeholder="Contoh: Modul Terkini atau Nama Portal Baru" required>
+                </div>
+                <div class="form-group">
+                    <label for="desc">Penerangan ringkas (Pilihan)</label>
+                    <textarea id="desc" rows="3" placeholder="Biarkan kosong jika ini hanyalah pautan umum..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="link">URL / Pautan (Wajib jika pilih Kategori Pautan Lain)</label>
+                    <input type="url" id="link" placeholder="https://...">
+                </div>
+                <button type="submit" id="submitBtn">Kemaskini Pangkalan Data</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Sektor Pembelajaran, Pejabat Pendidikan Daerah Dungun. Hak Cipta Terpelihara.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }
+
+        // Senarai Terbaharu 9 Unit Sektor Pembelajaran
+        const senaraiUnit = [
+            'Unit Sumber dan Teknologi Pendidikan', 
+            'Unit Pemulihan Khas', 
+            'Unit Pendidikan Khas',
+            'Unit Pendidikan Islam', 
+            'SISC+ Bahasa Melayu',
+            'SISC+ Bahasa Inggeris',
+            'SISC+ Sains',
+            'SISC+ Matematik',
+            'SISC+ Sejarah'
+        ];
+
+        // ==========================================
+        // 1. PAPARKAN KOTAK UNIT SIAP-SIAP (SKELETON)
+        // ==========================================
+        const unitContainer = document.getElementById('unit-container');
+        
+        // Bina kotak (card) untuk 9 unit pada permulaan (walaupun tiada data/internet)
+        senaraiUnit.forEach((unitName, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${unitName}</h3>
+                <div id="senarai-data-${index}">
+                    <p style="font-size:0.9rem; color:var(--text-muted); font-style: italic;">Belum ada maklumat dikongsi setakat ini.</p>
+                </div>
+            `;
+            unitContainer.appendChild(card);
+        });
+
+        // Set paparan awal untuk Pautan Tambahan
+        const pautanContainer = document.getElementById('pautan-container');
+        pautanContainer.innerHTML = '<p style="color:var(--text-muted); font-style: italic;">Belum ada pautan tambahan dikongsi pengguna.</p>';
+
+        // ==========================================
+        // 2. KONFIGURASI FIREBASE ANDA
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "SILA_MASUKKAN_API_KEY_ANDA",
+            authDomain: "projek-anda.firebaseapp.com",
+            databaseURL: "https://projek-anda-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "projek-anda",
+            storageBucket: "projek-anda.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdefghij"
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const database = firebase.database();
+        const maklumatRef = database.ref('maklumat_ppd');
+
+        // ==========================================
+        // 3. BACA & KEMAS KINI DATA DARI FIREBASE
+        // ==========================================
+        maklumatRef.on('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            
+            let pautanList = [];
+
+            // A. Asingkan Data "Pautan Lain"
+            for (let key in data) {
+                if (data[key].unit === 'Pautan Lain') {
+                    pautanList.push(data[key]);
+                }
+            }
+
+            if(pautanList.length > 0) {
+                pautanContainer.innerHTML = ''; // Kosongkan mesej "Belum ada..."
+                pautanList.sort((a, b) => b.timestamp - a.timestamp);
+                pautanList.forEach(item => {
+                    let url = item.link ? item.link : '#';
+                    pautanContainer.innerHTML += `
+                        <a href="${url}" target="_blank" class="pautan-item">🔗 ${item.title}</a>
+                    `;
+                });
+            }
+
+            // B. Papar Maklumat Mengikut 9 Unit Terbaharu di dalam kotak yang telah dibina
+            senaraiUnit.forEach((unitName, index) => {
+                let postsForUnit = [];
+                for (let key in data) {
+                    if (data[key].unit === unitName) {
+                        postsForUnit.push(data[key]);
+                    }
+                }
+
+                // Cari bekas (container) data untuk kotak tersebut
+                const dataContainer = document.getElementById(`senarai-data-${index}`);
+
+                if(postsForUnit.length > 0) {
+                    let itemsHTML = '<ul>';
+                    postsForUnit.sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    postsForUnit.forEach(item => {
+                        let linkHTML = item.link ? `<a href="${item.link}" target="_blank">🔗 Buka Pautan</a>` : '';
+                        let descHTML = item.desc ? `<span style="font-size:0.9rem; margin-top:6px; color:var(--text-muted); line-height: 1.4;">${item.desc}</span>` : '';
+                        let dateObj = new Date(item.timestamp);
+                        let dateString = dateObj.toLocaleDateString('ms-MY', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' });
+
+                        itemsHTML += `<li>
+                            <span class="tarikh">${dateString}</span>
+                            <strong>${item.title}</strong>
+                            ${descHTML}
+                            ${linkHTML}
+                        </li>`;
+                    });
+                    itemsHTML += '</ul>';
+                    
+                    // Masukkan senarai ke dalam kotak unit tersebut
+                    dataContainer.innerHTML = itemsHTML;
+                }
+            });
+        }, (error) => {
+            console.error("Gagal memuatkan Firebase. Pastikan Config tepat.", error);
+        });
+
+        // ==========================================
+        // 4. HANTAR DATA KE FIREBASE
+        // ==========================================
+        document.getElementById('infoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const unit = document.getElementById('unitSelect').value;
+            const title = document.getElementById('title').value;
+            const desc = document.getElementById('desc').value;
+            const link = document.getElementById('link').value;
+            
+            if (unit === 'Pautan Lain' && !link) {
+                alert("Sila masukkan URL / Pautan bagi kategori 'Pautan Lain'.");
+                return;
+            }
+
+            btn.innerText = "Sistem Sedang Memproses...";
+            btn.disabled = true;
+            const timestamp = Date.now();
+
+            maklumatRef.push({
+                unit: unit,
+                title: title,
+                desc: desc,
+                link: link,
+                timestamp: timestamp
+            }).then(() => {
+                this.reset();
+                btn.innerText = "Kemaskini Pangkalan Data";
+                btn.disabled = false;
+                alert('Berjaya dihantar! Maklumat telah dikemas kini secara real-time.');
+                
+                if(unit === 'Pautan Lain') {
+                    window.location.hash = '#pautan';
+                } else {
+                    window.location.hash = '#unit';
+                }
+            }).catch((error) => {
+                alert("Ralat! Pastikan tetapan database rules Firebase Config anda dibuka.");
+                btn.innerText = "Kemaskini Pangkalan Data";
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
